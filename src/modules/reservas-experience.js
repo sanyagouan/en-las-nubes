@@ -78,6 +78,12 @@ function setupPlannerInteractions (form, preview, whatsappLink) {
         }, 1600)
       } catch (error) {
         console.warn('No se pudo copiar el mensaje de reserva:', error)
+        copyButton.dataset.feedback = 'copia manual'
+        copyButton.classList.add('is-error')
+        setTimeout(() => {
+          copyButton.classList.remove('is-error')
+          delete copyButton.dataset.feedback
+        }, 2000)
       }
     })
   }

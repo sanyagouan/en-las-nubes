@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import legacy from '@vitejs/plugin-legacy'
 import { VitePWA } from 'vite-plugin-pwa'
+import { visualizer } from 'rollup-plugin-visualizer'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -115,14 +116,37 @@ export default defineConfig({
         enabled: true,
         type: 'module'
       }
-    })
+    }),
+    ...(process.env.ANALYZE === 'true'
+      ? [
+          visualizer({
+            filename: 'dist/report.html',
+            template: 'treemap',
+            gzipSize: true,
+            brotliSize: true
+          })
+        ]
+      : [])
   ],
   css: {
     devSourcemap: true
   },
   build: {
     target: 'es2019',
-    cssMinify: true
+    cssMinify: true,
+    modulePreload: { polyfill: true },
+    reportCompressedSize: true,
+    rollupOptions: {
+      output: {
+        manualChunks (id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('three')) return 'vendor-three'
+            if (id.includes('gsap')) return 'vendor-gsap'
+            if (id.includes('lottie')) return 'vendor-lottie'
+          }
+        }
+      }
+    }
   },
   optimizeDeps: {
     include: ['gsap', 'aos', 'lottie-web', 'three']

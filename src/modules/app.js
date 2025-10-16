@@ -8,6 +8,7 @@ export function initializeApp () {
 
   root.innerHTML = `
     <div class="cloud-frame" data-page="en-las-nubes">
+      <a class="skip-link" href="#menu" data-skip-link>Saltar al contenido principal</a>
       <header class="navbar-cloud" role="banner">
         <div class="cloud-container navbar-cloud__inner">
           <a class="brand-cloud" href="#hero" aria-label="Inicio En las Nubes">
@@ -112,7 +113,7 @@ export function initializeApp () {
           </div>
         </section>
 
-        <section id="menu" class="cloud-section cloud-section--menu" aria-labelledby="menu-title">
+        <section id="menu" class="cloud-section cloud-section--menu" aria-labelledby="menu-title" tabindex="-1">
           <div class="cloud-container">
             <header class="section-heading">
               <span class="section-eyebrow">Carta viva</span>
@@ -126,7 +127,7 @@ export function initializeApp () {
           </div>
         </section>
 
-        <section id="reservas" class="cloud-section cloud-section--reservas" aria-labelledby="reservas-title">
+        <section id="reservas" class="cloud-section cloud-section--reservas" aria-labelledby="reservas-title" tabindex="-1">
           <div class="cloud-container">
             <header class="section-heading">
               <span class="section-eyebrow">Acceso directo al cielo</span>

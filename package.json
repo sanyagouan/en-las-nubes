@@ -6,13 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:report": "node scripts/build-report.mjs",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.js\"",
     "lint:styles": "stylelint \"src/**/*.{css,scss}\"",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "check": "npm run lint && npm run lint:styles && npm run test:coverage"
+    "check": "npm-run-all2 lint lint:styles test:coverage"
   },
   "keywords": [
     "restaurante",
@@ -45,7 +46,9 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.6.0",
     "jsdom": "^27.0.0",
+    "npm-run-all2": "^6.2.6",
     "postcss": "^8.5.6",
+    "rollup-plugin-visualizer": "^5.14.0",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
     "vite": "^6.0.11",
