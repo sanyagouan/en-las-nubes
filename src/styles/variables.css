@@ -1,0 +1,48 @@
+:root {
+  --cloud-white: #fefefe;
+  --cloud-gray: #e2e8f0;
+  --storm-blue: #2d3748;
+  --sunset-gold: #f6ad55;
+  --sky-blue: #4299e1;
+  --asturian-green: #38a169;
+  --german-red: #e53e3e;
+  --warm-amber: #dd6b20;
+
+  --cloud-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --sunset-gradient: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+  --storm-gradient: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+
+  --font-hero: 'Playfair Display', serif;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+  --font-accent: 'Dancing Script', cursive;
+
+  --mobile: 320px;
+  --mobile-l: 425px;
+  --tablet: 768px;
+  --laptop: 1024px;
+  --laptop-l: 1440px;
+  --desktop: 2560px;
+
+  --max-width: 1380px;
+  --page-padding: clamp(1rem, 4vw, 3rem);
+  --radius-soft: 18px;
+  --radius-pill: 999px;
+  --blur-strong: 30px;
+  --shadow-cloud: 0 20px 40px rgba(45, 55, 72, 0.25);
+  --shadow-soft: 0 10px 25px rgba(45, 55, 72, 0.2);
+  --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cloud-white: #1a202c;
+    --cloud-gray: #2d3748;
+    --storm-blue: #e2e8f0;
+    --sunset-gold: #f6ad55;
+    --sky-blue: #90cdf4;
+    --asturian-green: #68d391;
+    --german-red: #fc8181;
+    --warm-amber: #f6ad55;
+  }
+}

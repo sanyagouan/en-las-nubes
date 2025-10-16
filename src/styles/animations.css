@@ -1,0 +1,56 @@
+@layer components {
+  @keyframes floatDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-100px) scale(0.85);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes cloudDrift {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: translate3d(40px, -20px, 0) scale(1.05);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(-20px, 30px, 0) scale(0.98);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes glowPulse {
+    0%,
+    100% {
+      box-shadow: 0 10px 20px rgba(66, 153, 225, 0.25);
+    }
+    50% {
+      box-shadow: 0 20px 45px rgba(118, 75, 162, 0.4);
+    }
+  }
+
+  .anim-float-down {
+    animation: floatDown 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .anim-fade-in-up {
+    animation: fadeInUp 0.9s ease forwards;
+  }
+}

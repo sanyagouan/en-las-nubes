@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="cloud" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#667eea" />
+      <stop offset="100%" stop-color="#764ba2" />
+    </linearGradient>
+    <linearGradient id="sun" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f6ad55" />
+      <stop offset="100%" stop-color="#dd6b20" />
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="26" fill="#2d3748" />
+  <circle cx="78" cy="44" r="18" fill="url(#sun)" opacity="0.9" />
+  <path
+    d="M35 76c-6.6 0-12-5.4-12-12 0-6 4.5-10.9 10.3-11.8 2.8-9.5 11.5-16.2 21.7-16.2 9.4 0 17.5 5.7 20.9 13.9 0.8-0.1 1.6-0.2 2.4-0.2 9.4 0 17 7.6 17 17s-7.6 17-17 17H35z"
+    fill="url(#cloud)"
+  />
+  <text x="60" y="90" text-anchor="middle" font-size="20" font-family="'Playfair Display', serif" fill="#fefefe">
+    EN
+  </text>
+</svg>
