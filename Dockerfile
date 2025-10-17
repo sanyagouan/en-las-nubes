@@ -1,4 +1,4 @@
-# Multi-stage Dockerfile optimizado para producción en Coolify VPS
+# Multi-stage Dockerfile optimizado para produccion en Coolify VPS
 # En las Nubes Restobar - Build ultra-optimizado
 
 # ========================================
@@ -12,7 +12,7 @@ ENV VITE_API_BASE_URL=/api
 ENV VITE_APP_VERSION=1.0.0
 ENV ANALYZE=false
 
-# Instalar dependencias básicas para el build
+# Instalar dependencias basicas para el build
 RUN apk add --no-cache \
     libc6-compat \
     glib \
@@ -31,15 +31,14 @@ WORKDIR /app
 
 # Copiar package files con cache optimizado
 COPY package*.json ./
-COPY pnpm-lock.yaml* ./
 
-# Instalar dependencias con npm ci para producción
+# Instalar dependencias con npm ci para produccion
 RUN npm ci --only=production --silent && npm cache clean --force
 
-# Copiar código fuente
+# Copiar codigo fuente
 COPY . .
 
-# Build optimizado para VPS con análisis de bundle
+# Build optimizado para VPS con analisis de bundle
 RUN npm run build
 
 # Generar reporte de build para Coolify
@@ -53,9 +52,9 @@ FROM nginx:alpine AS production
 # Etiquetas para Coolify
 LABEL maintainer="En las Nubes Restobar"
 LABEL version="1.0.0"
-LABEL description="Experiencia web cinematográfica para En las Nubes Restobar"
+LABEL description="Experiencia web cinematografica para En las Nubes Restobar"
 
-# Variables de entorno de producción
+# Variables de entorno de produccion
 ENV NGINX_PORT=80
 ENV NGINX_HOST=localhost
 ENV SSL_CERT_PATH=""
@@ -69,7 +68,7 @@ RUN apk add --no-cache \
     tzdata \
     && rm -rf /var/cache/apk/*
 
-# Configuración de timezone
+# Configuracion de timezone
 ENV TZ=Europe/Madrid
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -81,11 +80,8 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 COPY healthcheck.sh /usr/local/bin/healthcheck.sh
 RUN chmod +x /usr/local/bin/healthcheck.sh
 
-# Copiar build estático
+# Copiar build estatico
 COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Copiar scripts de mantenimiento
-COPY scripts/ /opt/scripts/ || echo "Scripts directory not found, skipping"
 
 # Configurar permisos optimizados
 RUN chown -R nginx:nginx /usr/share/nginx/html \
