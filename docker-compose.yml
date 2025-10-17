@@ -1,0 +1,149 @@
+# Docker Compose optimizado para Coolify VPS
+# En las Nubes Restobar - Configuración de producción
+
+version: '3.8'
+
+services:
+  # Servicio principal de la aplicación web
+  app:
+    image: enlasnubes/restobar:latest
+    container_name: enlasnubes-web
+    restart: unless-stopped
+
+    # Variables de entorno para Coolify
+    environment:
+      - NODE_ENV=production
+      - NGINX_HOST=${NGINX_HOST:-enlasnubes.localhost}
+      - NGINX_PORT=${NGINX_PORT:-80}
+      - TZ=Europe/Madrid
+
+      # URLs de APIs externas (para el pipeline de datos)
+      - CARTAMENU_API_URL=${CARTAMENU_API_URL:-https://cartamenú.com/api}
+      - CELEBRARLO_API_URL=${CELEBRARLO_API_URL:-https://celebrarlo.com/api}
+      - RESTAURANTGURU_API_URL=${RESTAURANTGURU_API_URL:-https://restaurantguru.com/api}
+
+      # Configuración PWA y Cache
+      - PWA_CACHE_STRATEGY=${PWA_CACHE_STRATEGY:-networkFirst}
+      - CACHE_MAX_AGE=${CACHE_MAX_AGE:-2592000}
+
+      # Analíticas y monitoreo
+      - GTM_ID=${GTM_ID:-}
+      - ANALYTICS_ENABLED=${ANALYTICS_ENABLED:-true}
+
+    ports:
+      - "${APP_PORT:-8080}:80"
+
+    volumes:
+      # Montaje de logs para persistencia
+      - nginx_logs:/var/log/nginx
+      - nginx_cache:/var/cache/nginx
+
+      # Configuración SSL (si existe)
+      - ${SSL_CERT_PATH:-./ssl/cert.pem}:/etc/ssl/certs/cert.pem:ro
+      - ${SSL_KEY_PATH:-./ssl/key.pem}:/etc/ssl/private/key.pem:ro
+
+    networks:
+      - enlasnubes-network
+
+    # Límites de recursos optimizados para VPS
+    deploy:
+      resources:
+        limits:
+          cpus: '${CPU_LIMIT:-1.0}'
+          memory: '${MEMORY_LIMIT:-512M}'
+        reservations:
+          cpus: '${CPU_RESERVATION:-0.5}'
+          memory: '${MEMORY_RESERVATION:-256M}'
+
+    # Health check específico para Coolify
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+    # Labels para Coolify
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.enlasnubes.rule=Host(`${DOMAIN:-enlasnubes.localhost}`)"
+      - "traefik.http.routers.enlasnubes.entrypoints=websecure"
+      - "traefik.http.routers.enlasnubes.tls.certresolver=letsencrypt"
+      - "traefik.http.services.enlasnubes.loadbalancer.server.port=80"
+      - "coolify.service.name=enlasnubes-restobar"
+      - "coolify.service.type=webapp"
+      - "coolify.service.version=1.0.0"
+
+  # Servicio de backup automático (opcional)
+  backup:
+    image: alpine:latest
+    container_name: enlasnubes-backup
+    restart: "no"
+
+    environment:
+      - BACKUP_SCHEDULE=${BACKUP_SCHEDULE:-0 2 * * *}
+      - BACKUP_RETENTION_DAYS=${BACKUP_RETENTION_DAYS:-30}
+      - S3_BUCKET=${S3_BUCKET:-}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+
+    volumes:
+      - nginx_logs:/backup/logs:ro
+      - nginx_cache:/backup/cache:ro
+      - ${BACKUP_MOUNT_PATH:-./backups}:/backups
+
+    networks:
+      - enlasnubes-network
+
+    # Script de backup
+    command: >
+      sh -c "
+        apk add --no-cache aws-cli tar gzip cronie &&
+        echo '$$BACKUP_SCHEDULE /usr/local/bin/backup.sh' | crontab - &&
+        mkdir -p /backups &&
+        echo '#!/bin/sh' > /usr/local/bin/backup.sh &&
+        echo 'DATE=$$(date +%Y%m%d_%H%M%S)' >> /usr/local/bin/backup.sh &&
+        echo 'tar -czf /backups/enlasnubes_backup_$$DATE.tar.gz /backup/*' >> /usr/local/bin/backup.sh &&
+        echo 'find /backups -name \"*.tar.gz\" -mtime +$$BACKUP_RETENTION_DAYS -delete' >> /usr/local/bin/backup.sh &&
+        echo 'if [ -n \"$$S3_BUCKET\" ]; then aws s3 cp /backups/enlasnubes_backup_$$DATE.tar.gz s3://$$S3_BUCKET/backups/; fi' >> /usr/local/bin/backup.sh &&
+        chmod +x /usr/local/bin/backup.sh &&
+        crond -f -l 2
+      "
+
+  # Servicio de monitoreo (opcional)
+  monitor:
+    image: nginx/nginx-prometheus-exporter:latest
+    container_name: enlasnubes-monitor
+    restart: unless-stopped
+
+    environment:
+      - SCRAPE_URI=http://app:80/nginx_status
+      - TELEMETRY_PATH=/metrics
+      - NAMESPACE=enlasnubes
+
+    ports:
+      - "${MONITOR_PORT:-9113}:9113"
+
+    networks:
+      - enlasnubes-network
+
+    depends_on:
+      - app
+
+# Volúmenes persistentes para Coolify
+volumes:
+  nginx_logs:
+    driver: local
+    name: enlasnubes_nginx_logs
+  nginx_cache:
+    driver: local
+    name: enlasnubes_nginx_cache
+
+# Red optimizada para VPS
+networks:
+  enlasnubes-network:
+    driver: bridge
+    name: enlasnubes-network
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

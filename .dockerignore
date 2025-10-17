@@ -1,0 +1,293 @@
+# .dockerignore optimizado para Coolify VPS
+# Excluir archivos innecesarios para builds ligeros y rápidos
+
+# ========================================
+# DEPENDENCIAS DE DESARROLLO
+# ========================================
+
+# Node modules (se reinstalarán en build)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ========================================
+# ARCHIVOS DE BUILD Y CACHE
+# ========================================
+
+# Directorio de builds (se generará en Docker)
+dist/
+build/
+out/
+
+# Cache de Vite y herramientas
+.vite/
+.cache/
+.temp/
+*.tsbuildinfo
+
+# Coverage y testing
+coverage/
+.nyc_output/
+test-results/
+junit.xml
+
+# ========================================
+# CONFIGURACIÓN LOCAL Y SECRETS
+# ========================================
+
+# Variables de entorno locales
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos de configuración local
+.git/
+.gitignore
+README.md
+CHANGELOG.md
+LICENSE
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# ========================================
+# IDE Y EDITORES
+# ========================================
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# JetBrains
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Vim/Nano
+*.swp
+*.swo
+*~
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.com.apple.timemachine.supported
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ========================================
+# DOCUMENTACIÓN Y ARCHIVOS NO ESENCIALES
+# ========================================
+
+# Documentación
+docs/
+*.md
+!README.md
+
+# Archivos de ejemplo
+examples/
+demo/
+samples/
+
+# Archivos de diseño
+*.sketch
+*.fig
+*.psd
+*.ai
+*.xd
+
+# ========================================
+# BACKUPS Y LOGS
+# ========================================
+
+# Logs
+logs/
+*.log
+
+# Backups
+backups/
+*.backup
+*.bak
+
+# ========================================
+# HERRAMIENTAS Y SCRIPTS DE DESARROLLO
+# ========================================
+
+# Scripts de desarrollo que no se necesitan en producción
+scripts/dev-*
+scripts/test-*
+scripts/local-*
+
+# Configuración de ESLint, Prettier, etc. que no se necesita en producción
+.eslintrc*
+.prettierrc*
+.stylelintrc*
+.editorconfig
+
+# ========================================
+# ARCHIVOS GRANDES Y MULTIMEDIA (si no son esenciales)
+# ========================================
+
+# Videos grandes que no son parte del assets final
+*.mp4
+*.avi
+*.mov
+*.wmv
+!src/assets/videos/*.webm
+
+# Imágenes en alta resolución para desarrollo
+*.psd
+*.tiff
+*.raw
+!src/assets/images/*
+
+# ========================================
+# TESTING Y QUALITY ASSURANCE
+# ========================================
+
+# Tests unitarios y de integración
+tests/
+__tests__/
+test/
+*.test.js
+*.spec.js
+*.test.ts
+*.spec.ts
+
+# Testing tools
+cypress/
+playwright/
+nightwatch/
+
+# ========================================
+# MONITOREO Y ANALYTICS (archivos de config local)
+# ========================================
+
+# Google Analytics (solo el ID va en variables de entorno)
+google-analytics.json
+
+# Sentry CLI
+.sentryclirc
+
+# ========================================
+# DEPLOYMENT Y CI/CD
+# ========================================
+
+# GitHub Actions, GitLab CI, etc.
+.github/
+.gitlab-ci.yml
+.travis.yml
+.circleci/
+
+# Terraform, Ansible, etc.
+*.tf
+*.tfstate
+*.yml (excepto docker-compose.yml)
+!docker-compose.yml
+
+# ========================================
+# PAQUETES Y GESTORES DE VERSIÓN
+# ========================================
+
+# Package managers cache
+.npm/
+.yarn/
+.pnpm-store/
+
+# Python (si hay scripts de Python)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Ruby (si hay scripts de Ruby)
+.bundle/
+vendor/bundle/
+.ruby-version
+
+# ========================================
+# BASES DE DATOS LOCALES
+# ========================================
+
+# SQLite
+*.sqlite
+*.sqlite3
+*.db
+
+# MySQL/MariaDB dump
+*.sql
+*.dump
+
+# ========================================
+# ARCHIVOS TEMPORALES Y SISTEMA
+# ========================================
+
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+.lock
+
+# Permisos y sistema
+*.pid
+*.seed
+*.pid.lock
+
+# ========================================
+# COOLIFY ESPECÍFICO
+# ========================================
+
+# Excluir archivos que Coolify gestiona automáticamente
+coolify.json
+coolify.yml
+
+# Backups específicos de Coolify
+.coolify-backups/
+
+# Logs de despliegue de Coolify
+coolify-deploy.log

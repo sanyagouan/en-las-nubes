@@ -177,6 +177,14 @@ export function initializeApp () {
             <span>Horario extendido</span>
             <p>Martes a domingo · 13:00 - 16:30 &middot; 20:00 - 00:30</p>
           </div>
+          <div>
+            <span>Legal y privacidad</span>
+            <div class="cloud-footer__legal">
+              <a href="/politica-privacidad.html" rel="noopener">Política de privacidad</a>
+              <a href="/terminos-servicio.html" rel="noopener">Términos y condiciones</a>
+              <button id="cookie-settings" style="background: none; border: none; color: rgba(144, 205, 244, 0.9); text-decoration: underline; cursor: pointer; font-size: inherit;">Configurar cookies</button>
+            </div>
+          </div>
           <div class="cloud-footer__social">
             <a href="https://carta.menu/restaurants/logrono/en-las-nubes-restobar" target="_blank" rel="noopener">Ficha oficial</a>
             <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>

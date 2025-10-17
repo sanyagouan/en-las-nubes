@@ -1,0 +1,335 @@
+# GitHub Actions Workflow para despliegue automático en Coolify
+# En las Nubes Restobar - CI/CD Pipeline completo
+
+name: 🚀 Deploy to Coolify VPS
+
+on:
+  push:
+    branches: [ main, feature/en-las-nubes-website ]
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+      - '.gitignore'
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+      - '.gitignore'
+
+  # Despliegue manual desde GitHub Actions
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - staging
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # ========================================
+  # JOB 1: Testing y Validación
+  ========================================
+  test:
+    name: 🧪 Test & Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 🔧 Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔍 Lint code
+        run: npm run lint
+        continue-on-error: false
+
+      - name: 🎨 Lint styles
+        run: npm run lint:styles
+        continue-on-error: false
+
+      - name: 🧪 Run tests
+        run: npm run test:run
+        continue-on-error: false
+
+      - name: 📊 Test coverage
+        run: npm run test:coverage
+        continue-on-error: false
+
+      - name: 📈 Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage/lcov.info
+          fail_ci_if_error: false
+
+      - name: 🔐 Security audit
+        run: npm audit --audit-level moderate
+        continue-on-error: true
+
+  # ========================================
+  # JOB 2: Build y Docker Image
+  ========================================
+  build:
+    name: 🔨 Build & Package
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+
+    outputs:
+      image-digest: ${{ steps.build.outputs.digest }}
+      image-tag: ${{ steps.meta.outputs.tags }}
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 🔧 Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: 🔨 Build application
+        run: npm run build
+        env:
+          NODE_ENV: production
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_APP_VERSION: ${{ github.sha }}
+
+      - name: 📊 Generate build report
+        run: |
+          npm run build:report
+          echo "## 📊 Build Report" >> $GITHUB_STEP_SUMMARY
+          echo "Generated build analysis report" >> $GITHUB_STEP_SUMMARY
+
+      - name: 🐳 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: 🔑 Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📋 Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=${{ github.sha }}
+
+      - name: 🐳 Build and push Docker image
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            NODE_ENV=production
+            VITE_APP_VERSION=${{ github.sha }}
+            VITE_API_BASE_URL=${{ secrets.VITE_API_BASE_URL }}
+
+      - name: 🔍 Test Docker image
+        run: |
+          docker run --rm -d -p 8080:80 --name test-container ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          sleep 10
+          curl -f http://localhost:8080/api/health || exit 1
+          docker stop test-container
+
+      - name: 📝 Image digest output
+        run: |
+          echo "Digest: ${{ steps.build.outputs.digest }}"
+          echo "Image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}"
+
+  # ========================================
+  # JOB 3: Despliegue a Coolify
+  ========================================
+  deploy:
+    name: 🚀 Deploy to Coolify
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    environment:
+      name: ${{ github.event.inputs.environment || 'production' }}
+      url: ${{ secrets.COOLIFY_APP_URL }}
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📋 Deploy to Coolify
+        id: coolify-deploy
+        uses: coollabsio/coolify-deploy-action@v3
+        with:
+          server_url: ${{ secrets.COOLIFY_SERVER_URL }}
+          api_key: ${{ secrets.COOLIFY_API_KEY }}
+          application_id: ${{ secrets.COOLIFY_APPLICATION_ID }}
+          image: ${{ needs.build.outputs.image-tag }}
+          environment: ${{ github.event.inputs.environment || 'production' }}
+
+      - name: ⏱️ Wait for deployment
+        run: |
+          echo "Waiting for deployment to be ready..."
+          sleep 30
+
+      - name: 🔍 Health check
+        run: |
+          max_attempts=30
+          attempt=1
+
+          while [ $attempt -le $max_attempts ]; do
+            echo "Health check attempt $attempt/$max_attempts"
+
+            if curl -f -s "${{ secrets.COOLIFY_APP_URL }}/api/health" > /dev/null; then
+              echo "✅ Health check passed!"
+              break
+            fi
+
+            if [ $attempt -eq $max_attempts ]; then
+              echo "❌ Health check failed after $max_attempts attempts"
+              exit 1
+            fi
+
+            echo "⏳ Waiting 10 seconds before next attempt..."
+            sleep 10
+            attempt=$((attempt + 1))
+          done
+
+      - name: 🧪 Post-deployment tests
+        run: |
+          # Test 1: Basic accessibility
+          curl -f -s "${{ secrets.COOLIFY_APP_URL }}" > /dev/null
+          echo "✅ Main page accessible"
+
+          # Test 2: Service Worker
+          curl -f -s "${{ secrets.COOLIFY_APP_URL }}/sw.js" > /dev/null
+          echo "✅ Service Worker accessible"
+
+          # Test 3: PWA Manifest
+          curl -f -s "${{ secrets.COOLIFY_APP_URL }}/manifest.json" > /dev/null
+          echo "✅ PWA Manifest accessible"
+
+          # Test 4: Health endpoint
+          curl -f -s "${{ secrets.COOLIFY_APP_URL }}/api/health" > /dev/null
+          echo "✅ Health endpoint working"
+
+      - name: 📊 Performance check
+        run: |
+          # Simple performance check
+          response_time=$(curl -o /dev/null -s -w '%{time_total}' "${{ secrets.COOLIFY_APP_URL }}")
+          echo "Response time: ${response_time}s"
+
+          if (( $(echo "$response_time > 3.0" | bc -l) )); then
+            echo "⚠️ Warning: Response time is higher than expected"
+          else
+            echo "✅ Response time is acceptable"
+          fi
+
+      - name: 🎉 Deployment summary
+        run: |
+          echo "## 🎉 Deployment Successful!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed Image:** ${{ needs.build.outputs.image-tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Application URL:** ${{ secrets.COOLIFY_APP_URL }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** ${{ github.event.inputs.environment || 'production' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+
+  # ========================================
+  # JOB 4: Notificación (opcional)
+  ========================================
+  notify:
+    name: 📢 Notify Deployment
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    if: always() && (needs.build.result == 'success' && needs.deploy.result == 'success')
+
+    steps:
+      - name: 📧 Slack notification
+        if: secrets.SLACK_WEBHOOK_URL != ''
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          channel: '#deployments'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+
+      - name: 📧 Email notification
+        if: secrets.NOTIFICATION_EMAIL != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "🚀 En las Nubes - Deploy completed to ${{ github.event.inputs.environment || 'production' }}"
+          body: |
+            Deployment completed successfully!
+
+            • Repository: ${{ github.repository }}
+            • Commit: ${{ github.sha }}
+            • Branch: ${{ github.ref }}
+            • Environment: ${{ github.event.inputs.environment || 'production' }}
+            • Deployed by: ${{ github.actor }}
+            • URL: ${{ secrets.COOLIFY_APP_URL }}
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          from: ${{ secrets.EMAIL_FROM }}
+
+  # ========================================
+  # JOB 5: Rollback (si falla el despliegue)
+  ========================================
+  rollback:
+    name: 🔄 Rollback on Failure
+    runs-on: ubuntu-latest
+    needs: [build, deploy]
+    if: failure() && needs.build.result == 'success' && needs.deploy.result == 'failure'
+
+    steps:
+      - name: 🔄 Initiate rollback
+        run: |
+          echo "🚨 Deployment failed, initiating rollback..."
+          echo "Previous successful deployment will be restored"
+
+      - name: 📋 Rollback with Coolify
+        uses: coollabsio/coolify-deploy-action@v3
+        with:
+          server_url: ${{ secrets.COOLIFY_SERVER_URL }}
+          api_key: ${{ secrets.COOLIFY_API_KEY }}
+          application_id: ${{ secrets.COOLIFY_APPLICATION_ID }}
+          rollback: true
+
+      - name: 📢 Rollback notification
+        run: |
+          echo "## 🔄 Rollback Completed" >> $GITHUB_STEP_SUMMARY
+          echo "Previous deployment has been restored due to deployment failure." >> $GITHUB_STEP_SUMMARY

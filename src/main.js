@@ -6,6 +6,8 @@ import { setupNavigationBehavior } from './modules/navigation.js'
 import { registerCloudServiceWorker } from './modules/pwa.js'
 import { initializeThemeToggle } from './modules/theme.js'
 import { initPerformanceBudget } from './modules/performance.js'
+import CookieConsent from './modules/cookie-consent.js'
+import AccessibilityControls from './modules/accessibility-controls.js'
 
 const scheduleIdleTask = (task) => {
   if (typeof window === 'undefined') {
@@ -78,6 +80,20 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeApp()
   setupNavigationBehavior()
   initializeThemeToggle()
+
+  // Inicializar sistema de cookies GDPR
+  window.cookieConsent = new CookieConsent()
+
+  // Configurar botón de preferencias de cookies en footer
+  const cookieSettingsBtn = document.getElementById('cookie-settings')
+  if (cookieSettingsBtn) {
+    cookieSettingsBtn.addEventListener('click', () => {
+      window.cookieConsent.showPreferences()
+    })
+  }
+
+  // Inicializar controles de accesibilidad
+  window.accessibilityControls = new AccessibilityControls()
 
   const loadMenuExperience = createLazyModule(async () => {
     const { initializeMenuExperience } = await import('./modules/menu-experience.js')
