@@ -1,0 +1,88 @@
+{
+  "source": "celebrarlo",
+  "retrievedAt": "2025-10-16T23:56:53.458Z",
+  "originalUrl": "https://www.celebrarlo.com/restaurante/en-las-nubes-restobar/",
+  "name": "En las Nubes Restobar",
+  "description": "En pleno centro histórico de Logroño, a tan solo 5 minutos del casco antiguo de la capital de La Rioja y de la catedral está En las Nubes Restobar, un lugar con mucho encanto donde podrá degustar lo mejor de la gastronomía internacional y organizar un evento ya sea familiar, de amigos o de empresa. Espacios y capacidades La decoración en el interior de En las Nubes Restobar es de estilo industrial y vintage. Cuenta con dos comedores con capacidad de 55 comensales y una terraza para otras 44 personas, ideal para comidas y cenas de grupos y eventos como bautizos, bodas o comuniones. Gastronomía En las Nubes Restobar le ofrecen una amplia carta de platos de la variada cocina internacional y asturiana con especialidades como el cachopo asturiano o la fabada, comida alemana como la Kartoffelsalat (ensalada de patatas), las salchichas Nuremberg, la Schalchtplatte (surtido de salchichas, codillo y Leberkäs con puré de patata y chucrut) o el codillo con puré de patata casero y chucrut); de la cocina española destacan los garbanzos con espinacas, el salmorejo de tomate, libritos de calabacín con queso, jamón con papas y mojo verde, bacalao a la riojana, jamón de pavo a la jardinera o filetes rusos con salsa de setas, entre otras delicias. También tienen platos para vegetarianos. Además, puede maridar la comida con vinos de la bodega de la casa o cervezas artesanas. Ubicación A orilla del río Ebro descansa Logroño que ha sido, históricamente, un lugar de paso y cruce de caminos como el Camino de Santiago. A los arcos de la calle Portales se asoman los edificios más importantes de la ciudad, como el Parlamento de la Rioja, el Museo de La Rioja, la concatedral de Santa María la Redonda y el palacio de los Chapiteles, los puentes de Piedra y de Hierro, palacios, iglesias… Muchas de las mejores muestras patrimoniales que ver en La Rioja se encuentran en Logroño. Los amantes de la gastronomía no deben dejar de hacer el recorrido que les espera en la calle Laurel, llena de bares, estando cada uno de ellos especializado en un tipo concreto de pinchos. Si le gusta el vino, visitar la bodega y viñedos de uno de los mejores caldos de España debe figurar en su lista de cosas que hacer en La Rioja. Si prefiere actividades al aire libre, visite el Parque Natural Sierra de Cebollera, a unos 50 km de Logroño, en el alto valle del río Iregua y donde encontrará cascadas, lagos, riachuelos, bosques y una extensa fauna y si le gusta practicar deportes como el esquí tiene la estación de Valdezcaray, en la Sierra de la Demanda riojana. Además, después puede aprovechar el día para visitar lugares como el monasterio de San Millán de la Cogolla o el pueblo de Ezcaray.",
+  "address": {
+    "street": "Calle María Teresa Gil de Gárate, 16",
+    "locality": "Logroño",
+    "region": "La Rioja",
+    "postalCode": "26002",
+    "country": "España",
+    "coordinates": {
+      "@type": "GeoCoordinates",
+      "latitude": "42.462827876078684",
+      "longitude": "-2.4493049355819494"
+    }
+  },
+  "telephone": "941 57 84 51",
+  "cuisines": [
+    "Asturiana",
+    "Internacional",
+    "Alemana"
+  ],
+  "priceRange": "Menú desde 15.00 €",
+  "gallery": [
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-1-1.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-2.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-3-528x700.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-4-528x700.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-5-528x700.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-6.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-7-540x700.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-1-1-200x150.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-2-200x150.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-3-200x150.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-4-200x150.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-5-200x150.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-6-200x150.jpg",
+      "alt": ""
+    },
+    {
+      "src": "https://www.celebrarlo.com/wp-content/uploads/2018/03/Restaurante_para_grupos_en_Logro¦o-7-200x150.jpg",
+      "alt": ""
+    }
+  ],
+  "notes": {
+    "capacities": null,
+    "gastronomyHighlights": null
+  }
+}

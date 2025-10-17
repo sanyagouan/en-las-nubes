@@ -1,0 +1,275 @@
+{
+  "source": "restaurantguru",
+  "retrievedAt": "2025-10-16T23:56:53.768Z",
+  "originalUrl": "https://es.restaurantguru.com/En-las-Nubes-Restobar-Logrono",
+  "name": "En las Nubes Restobar",
+  "description": "Tanto Calle del Laurel como En las Nubes Restobar merecen una visita. La cocina alemana forma parte de la carta de este bar. Es fácil encontrar En las Nubes Restobar gracias a su estupenda ubicación. Disfruta de un estupendo rato aquí y comparte su tierno rape, sus sorprendentes empanadas y sus bien trabajadas salchichas alemanas con tus amistades. Los invitados de este lugar pueden pedir una sabrosa tarta de queso, un atrayente pastel de frutas y un singular tiramisú. Su deliciosa cerveza artesanal, su excelente sidra o su espectacular vino harán que tu comida sea más sabrosa, lo que, seguramente, te hará volver. Degusta un insuperable café cortado en este lugar. Su atento personal recibe a los visitantes todo el año. Su agradable servicio te hará sentirte especial. Podemos recomendar este establecimiento por sus precios interesantes. Este bar tiene una atmósfera encantadora y una decoración admirable. Google le ha dado un 4,3, lo que indica que puedes ir a En las Nubes Restobar para pasar un rato agradable.",
+  "cuisines": [
+    "Alemana",
+    "Grill"
+  ],
+  "rating": {
+    "value": 4.3,
+    "count": 1787
+  },
+  "priceRange": "$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "España",
+    "addressLocality": "Logroño",
+    "addressRegion": "La Rioja",
+    "streetAddress": "Maria Teresa Gil de Garate 16"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "42.46276060",
+    "longitude": "-2.44931030"
+  },
+  "telephone": "+34941578451",
+  "openingHours": [
+    "Tu 13:00-17:00",
+    "Tu 20:00-00:00",
+    "We 13:00-17:00",
+    "We 20:00-00:00",
+    "Th 13:00-17:00",
+    "Th 20:00-00:00",
+    "Fr 13:00-17:00",
+    "Fr 20:00-00:30",
+    "Sa 13:00-17:30",
+    "Sa 20:00-01:00",
+    "Su 13:00-17:30"
+  ],
+  "ranking": "N.º 149 de 1030 restaurantes en Logroño",
+  "heroImage": "https://img.restaurantguru.com/rd1a-En-las-Nubes-Restobar-interior.jpg",
+  "gallery": [
+    {
+      "src": "https://img.restaurantguru.com/c56b-Pub-and-bar-En-las-Nubes-Restobar-dessert.jpg",
+      "category": 4,
+      "imageIds": [
+        "103_519715839",
+        "103_519715932",
+        "406_503435893"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c5bb-En-las-Nubes-Restobar-dishes.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715848",
+        "103_519715920",
+        "103_519715880"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/cf8d-Pub-and-bar-En-las-Nubes-Restobar-dishes.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715844",
+        "103_519715877",
+        "103_519715830"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c370-En-las-Nubes-Restobar-Logrono-food.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715881",
+        "103_519715858",
+        "103_519715864"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c1a1-En-las-Nubes-Restobar-Logrono-meals.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715850",
+        "103_519715853",
+        "103_519715883"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c55a-En-las-Nubes-Restobar-Logrono-dishes.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715845",
+        "103_519715902",
+        "103_519715901"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c822-En-las-Nubes-Restobar-food.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715911",
+        "103_519715927",
+        "103_519715834"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c773-En-las-Nubes-Restobar-meals.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715835",
+        "103_519715836",
+        "103_519715940"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/cb23-food-En-las-Nubes-Restobar.jpg",
+      "category": 8,
+      "imageIds": [
+        "406_504058665",
+        "103_519715872",
+        "406_503435889",
+        "406_503435892"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/cb7b-meals-En-las-Nubes-Restobar.jpg",
+      "category": 8,
+      "imageIds": [
+        "339_509526644",
+        "103_519715884",
+        "103_519715860"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c26c-dishes-En-las-Nubes-Restobar.jpg",
+      "category": 8,
+      "imageIds": [
+        "406_503435890",
+        "103_519715916",
+        "103_519715879"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/cca6-Pub-and-bar-En-las-Nubes-Restobar-food-1.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715874",
+        "103_519715862",
+        "103_519715885"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/ceeb-Pub-and-bar-En-las-Nubes-Restobar-meals.jpg",
+      "category": 8,
+      "imageIds": [
+        "406_503435887",
+        "103_519715929",
+        "103_519715938"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/cd1a-En-las-Nubes-Restobar-interior.jpg",
+      "category": 1,
+      "imageIds": [
+        "406_503435885",
+        "103_519715905",
+        "103_519715865"
+      ]
+    },
+    {
+      "src": "https://1033609670.rsc.cdn77.org/c0/Pub-and-bar-En-las-Nubes-Restobar-meals.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715893",
+        "103_519715904",
+        "339_509924865"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c5bc-En-las-Nubes-Restobar-Logrono-design.jpg",
+      "category": 1,
+      "imageIds": [
+        "103_519715831",
+        "103_519715838",
+        "103_519715895"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c42f-Pub-and-bar-En-las-Nubes-Restobar-food.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715934",
+        "103_519715863",
+        "103_519715833"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/cd7b-Pub-and-bar-En-las-Nubes-Restobar-burger.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715882",
+        "103_519715873",
+        "103_519715869"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/ce4f-Pub-and-bar-En-las-Nubes-Restobar-interior.jpg",
+      "category": 1,
+      "imageIds": [
+        "103_519715894",
+        "103_519715907",
+        "103_519715909"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/cde9-En-las-Nubes-Restobar-Logrono-burger.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715937",
+        "103_519715933",
+        "103_519715857"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/cdf6-Pub-and-bar-En-las-Nubes-Restobar-pizza.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715878",
+        "103_519715930",
+        "103_519715924"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/ca9f-En-las-Nubes-Restobar-Logrono-dessert.jpg",
+      "category": 4,
+      "imageIds": [
+        "406_503435891",
+        "103_519715931",
+        "103_519715926",
+        "103_519715837"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c503-En-las-Nubes-Restobar-dessert.jpg",
+      "category": 4,
+      "imageIds": [
+        "103_519715842",
+        "103_519715871",
+        "103_519715841",
+        "103_519715847"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c9ed-dessert-En-las-Nubes-Restobar.jpg",
+      "category": 4,
+      "imageIds": [
+        "103_519715851",
+        "339_509814889",
+        "103_519715903",
+        "103_519715861"
+      ]
+    },
+    {
+      "src": "https://img.restaurantguru.com/c7bb-Pub-and-bar-En-las-Nubes-Restobar-cake.jpg",
+      "category": 8,
+      "imageIds": [
+        "103_519715925",
+        "103_519715852",
+        "103_519715854"
+      ]
+    }
+  ]
+}

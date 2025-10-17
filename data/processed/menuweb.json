@@ -1,0 +1,87 @@
+{
+  "source": "menuweb",
+  "retrievedAt": "2025-10-16T23:56:53.594Z",
+  "originalUrl": "https://menuweb.menu/restaurants/el-cortijo/en-las-nubes-restobar-2",
+  "name": "En Las Nubes Restobar",
+  "description": "The Menu for En Las Nubes Restobar from El Cortijo has 2 Dishes. Order from the menu here.",
+  "telephone": "+34941578451",
+  "image": "https://weur-cdn.carta.menu/storage/media/company_gallery/106418120/conversions/contribution_gallery.jpg",
+  "cuisines": [
+    "European",
+    "Spanish Cuisine",
+    "Bars",
+    "And Grill",
+    "Brunch"
+  ],
+  "rating": {
+    "value": 4.2,
+    "count": 317
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "La Rioja, 26002 Logroño, C. María Teresa Gil De Gárate, 16, 16, Spain, El Cortijo",
+    "addressLocality": "El Cortijo",
+    "addressCountry": {
+      "@type": "Country",
+      "name": "ES"
+    }
+  },
+  "openingHours": [
+    "Monday 00:00 -00:00",
+    "Tuesday 12:00 -17:00",
+    "Wednesday 00:00 -17:00",
+    "Thursday 12:30 -17:00",
+    "Friday 12:30 -17:00",
+    "Saturday 12:30 -17:30",
+    "Sunday 12:30 -17:30"
+  ],
+  "acceptsReservations": false,
+  "reviews": [
+    {
+      "author": "antonio-c-office6479",
+      "rating": 4,
+      "body": "Buena comida y buen precio. Agradable ambiente. No ha cambiado.",
+      "language": "es"
+    },
+    {
+      "author": "rosario-c-church88",
+      "rating": 4,
+      "body": "Cenamos en grupo. Nos atendieron bien, comida bien.",
+      "language": "es"
+    },
+    {
+      "author": "elgaitero1979",
+      "rating": 4,
+      "body": "El cachopo estaba bien hecho y muy rico. Nos atendieron muy bien. Hay que reservar porque se llena.",
+      "language": "es"
+    },
+    {
+      "author": "soraya-d-5",
+      "rating": 1,
+      "body": "Cachopo increíble, ni pudimos terminarlo entre dos. El camarero de ojos azules que nos atendió un crack.",
+      "language": "es"
+    },
+    {
+      "author": "alejandra-m-vine125",
+      "rating": 2,
+      "body": "El cachopo muy rico pero la atención de una de las camareras deja mucho que desear. No me dieron ganas de volver.",
+      "language": "es"
+    }
+  ],
+  "heroImages": [
+    {
+      "src": "https://weur-cdn.carta.menu/storage/media/company_gallery/106418120/conversions/gallery_thumbnail.jpg",
+      "alt": "En Las Nubes Restobar food"
+    },
+    {
+      "src": "https://weur-cdn.carta.menu/storage/media/company_gallery/106637395/conversions/gallery_thumbnail.jpg",
+      "alt": "En Las Nubes Restobar outside"
+    },
+    {
+      "src": "https://weur-cdn.carta.menu/storage/media/companies_qr_codes/79021029/en-las-nubes-restobar-qr-code-menu-link.png",
+      "alt": "QR-Code zur Speisekarte von En Las Nubes Restobar"
+    }
+  ],
+  "menuItems": [],
+  "vcard": "https://weur-cdn.carta.menu/storage/media/companies_vcards/79021030/En-Las-Nubes-Restobar-vCard-Contacto-Dirección-Teléfono.vcf"
+}

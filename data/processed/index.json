@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2025-10-16T23:56:53.769Z",
+  "sources": [
+    {
+      "source": "celebrarlo",
+      "name": "En las Nubes Restobar",
+      "originalUrl": "https://www.celebrarlo.com/restaurante/en-las-nubes-restobar/",
+      "rating": null,
+      "telephone": "941 57 84 51"
+    },
+    {
+      "source": "menuweb",
+      "name": "En Las Nubes Restobar",
+      "originalUrl": "https://menuweb.menu/restaurants/el-cortijo/en-las-nubes-restobar-2",
+      "rating": {
+        "value": 4.2,
+        "count": 317
+      },
+      "telephone": "+34941578451"
+    },
+    {
+      "source": "restaurantguru",
+      "name": "En las Nubes Restobar",
+      "originalUrl": "https://es.restaurantguru.com/En-las-Nubes-Restobar-Logrono",
+      "rating": {
+        "value": 4.3,
+        "count": 1787
+      },
+      "telephone": "+34941578451"
+    }
+  ]
+}
